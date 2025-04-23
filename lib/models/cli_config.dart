@@ -19,6 +19,9 @@ class CliConfig {
   /// Whether to install Inno Setup into your system, if not already installed.
   final bool installInnoSetup;
 
+  /// Whether to install Chinese language, if not already installed.
+  final bool installChineseLanguage;
+
   /// Whether to generate app id and save it to pubspec.yaml.
   final bool generateAppId;
 
@@ -51,6 +54,7 @@ class CliConfig {
     this.app = true,
     this.installer = true,
     this.installInnoSetup = true,
+    this.installChineseLanguage = true,
     this.generateAppId = true,
     this.generatePublisher = true,
     this.appIdNamespace,

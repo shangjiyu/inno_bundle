@@ -131,7 +131,7 @@ void generateEssentials(File pubspecFile, CliConfig cliConfig) {
         ? uuid.v5(Namespace.url.value, cliConfig.appIdNamespace)
         : uuid.v1();
     innoInsertLine += 1;
-    lines.insert(innoInsertLine, "  id: $appId");
+    lines.insert(innoInsertLine, "  id: {{$appId}}");
   }
 
   if (cliConfig.generatePublisher &&
@@ -217,3 +217,42 @@ String getSystemUserName() =>
     Platform.environment['USER'] ?? // Linux/macOS
     Platform.environment['USERNAME'] ?? // Windows
     'Unknown User';
+
+/// Installs the ChineseSimplified.isl file into the Inno Setup Languages directory.
+///
+/// Downloads the file if not already present.
+/// Throws a [FileSystemException] if the operation fails.
+Future<void> installChineseSimplifiedTranslation({
+  String sourceUrl = 'https://github.com/kira-96/Inno-Setup-Chinese-Simplified-Translation/raw/refs/heads/main/ChineseSimplified.isl',
+}) async {
+  // Get Inno Setup executable path
+  final innoDir = getInnoSetupExec()!.parent;
+  final languagesDir = Directory(p.join(innoDir.path, 'Languages'));
+
+  if (!languagesDir.existsSync()) {
+    throw FileSystemException('Inno Setup Languages directory not found: \\${languagesDir.path}');
+  }
+
+  final destPath = p.join(languagesDir.path, 'ChineseSimplified.isl');
+  final destFile = File(destPath);
+  if (destFile.existsSync()) {
+    return;
+  }
+  // Download the file
+  final httpClient = HttpClient();
+  try {
+    final request = await httpClient.getUrl(Uri.parse(sourceUrl));
+    final response = await request.close();
+
+    if (response.statusCode == 200) {
+      await response.pipe(destFile.openWrite());
+      print('File downloaded to $destFile');
+    } else {
+      print('Error: HTTP status ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Download failed: $e');
+  } finally {
+    httpClient.close();
+  }
+}

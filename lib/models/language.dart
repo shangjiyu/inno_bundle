@@ -25,6 +25,7 @@ enum Language {
   brazilianportuguese("Languages\\BrazilianPortuguese.isl"),
   bulgarian("Languages\\Bulgarian.isl"),
   catalan("Languages\\Catalan.isl"),
+  chinese("Languages\\ChineseSimplified.isl"),
   corsican("Languages\\Corsican.isl"),
   czech("Languages\\Czech.isl"),
   danish("Languages\\Danish.isl"),

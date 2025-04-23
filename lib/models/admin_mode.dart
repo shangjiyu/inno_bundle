@@ -26,3 +26,16 @@ enum AdminMode {
     return auto;
   }
 }
+
+enum RunAdminMode {
+  admin,
+  nonAdmin,
+  auto;
+
+  static RunAdminMode fromOption(dynamic option) {
+    if (option is bool) {
+      return option ? admin : nonAdmin;
+    }
+    return auto;
+  }
+}

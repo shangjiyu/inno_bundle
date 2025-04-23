@@ -61,7 +61,7 @@ class ScriptBuilder {
 
     return '''
 [Setup]
-AppId=${config.id}
+AppId={{${config.id}}}
 AppName=${config.name}
 UninstallDisplayName=${config.name}
 UninstallDisplayIcon={app}\\${config.exePubspecName}
@@ -178,7 +178,7 @@ Name: "{autodesktop}\\${config.name}"; Filename: "{app}\\${config.exePubspecName
   String _run() {
     return '''
 [Run]
-Filename: "{app}\\${config.exePubspecName}"; Description: "{cm:LaunchProgram,{#StringChange('${config.name}', '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\\${config.exePubspecName}"; Description: "{cm:LaunchProgram,{#StringChange('${config.name}', '&', '&&')}}"; Flags: ${config.runAdmin == RunAdminMode.admin ? 'runascurrentuser' : ''} nowait postinstall skipifsilent
 \n''';
   }
 

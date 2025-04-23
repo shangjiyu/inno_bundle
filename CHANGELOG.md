@@ -1,3 +1,8 @@
+## 0.10.0
+- Upgrade 6.4.2
+- Supports run as current user
+- Supports ChineseSimplifiedTranslation
+
 ## 0.9.0
 
 - Adds config to control VC++ redistributable, either to bundle it with the installer or download it during installation, [#13](https://github.com/hahouari/inno_bundle/issues/13)

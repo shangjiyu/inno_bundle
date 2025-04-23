@@ -74,6 +74,8 @@ class Config {
   /// Whether the installer requires administrator privileges.
   final AdminMode admin;
 
+  final RunAdminMode runAdmin;
+
   /// The build type (debug or release).
   final BuildType type;
 
@@ -112,6 +114,7 @@ class Config {
     required this.installerIcon,
     required this.languages,
     required this.admin,
+    required this.runAdmin,
     required this.licenseFile,
     required this.signTool,
     required this.arch,
@@ -226,6 +229,7 @@ class Config {
           "in pubspec.yaml");
     }
     final admin = AdminMode.fromOption(inno['admin'] ?? true);
+    final runAdmin = RunAdminMode.fromOption(inno['run_admin'] ?? false);
 
     if (inno['license_file'] != null && inno['license_file'] is! String) {
       CliLogger.exitError("inno_bundle.license_file attribute is invalid "
@@ -298,6 +302,7 @@ class Config {
       installerIcon: installerIcon,
       languages: languages,
       admin: admin,
+      runAdmin: runAdmin,
       type: cliConfig.type,
       app: cliConfig.app,
       installer: cliConfig.installer,

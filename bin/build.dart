@@ -107,6 +107,10 @@ void main(List<String> arguments) async {
     await installInnoSetup();
   }
 
+  if (cliConfig.installChineseLanguage) {
+    await installChineseSimplifiedTranslation();
+  }
+
   final appBuildDir = await _buildApp(config);
   final scriptFile = await _buildScript(config, appBuildDir);
   await _buildInstaller(config, scriptFile);

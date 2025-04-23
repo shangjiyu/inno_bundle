@@ -75,7 +75,7 @@ final innoSetupInstallationSubCommand = [
   "JRSoftware.InnoSetup",
   "--exact",
   "--version",
-  "6.4.1",
+  "6.4.2",
   "--silent",
   "--no-upgrade",
   "--source",
